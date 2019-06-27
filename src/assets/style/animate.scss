@@ -11,8 +11,9 @@
 
 @keyframes move_lf_2_rg {
     0% {
-        transform: translateX(-100%);
+        transform: translateX(-300%);
         opacity: 0;
+        display: none;
     }
     50% {
         transform: scaleX(1.2);
@@ -20,6 +21,7 @@
     100% {
         transform: translateX(0) translateZ(1);
         opacity: 1;
+        display: block;
     }
 }
 

@@ -39,6 +39,7 @@
 
 <style scoped lang='scss'>
 @import '@/assets/style/mixin.scss';
+@import '@/assets/style/animate.scss';
 @include b(page) {
   background-image: url(../../../assets/imgs/index/bg_technology.png);
   background-repeat: no-repeat;

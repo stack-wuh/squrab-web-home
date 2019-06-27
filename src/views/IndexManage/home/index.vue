@@ -2,7 +2,7 @@
   <section class='my-page'>
     <my-elem-block :styles="styles" currIndex="1">
       <section class="my-wrap">
-        <h1 class="my-wrap__title text-move-right">Live for More</h1>
+        <h1 class="my-wrap__title">Live for More</h1>
         <p  @click="handleAutoPlay" class="my-wrap__list">
           <span class="my-icon-arrow-bottom my-wrap__list--arrow my-wrap__list--arrow-1"></span>
           <span class="my-icon-arrow-bottom my-wrap__list--arrow my-wrap__list--arrow-2"></span>

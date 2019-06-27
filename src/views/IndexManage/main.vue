@@ -5,13 +5,13 @@
                 <img src="../../assets/imgs/logo.png" alt="logo">
             </div>
         </header>
-        <transition-group name="fade" mode="out-in">
+        <!-- <transition-group name="fade" mode="out-in"> -->
             <Home key="home" id="home" class="my-child" />
             <Technology key="technology" id="technology" class="my-child" />
             <Lift key="lift" id="lift" class="my-child" />
             <Future key="future" id="future" class="my-child" />
             <Join key="join" id="join" class="my-child" />
-        </transition-group>
+        <!-- </transition-group> -->
         <MyNavBar 
             @open-click="handleOpenClick" 
             v-model="currIndex" 
@@ -29,6 +29,7 @@
  import MyFooter from '@/components/nav/footer'
  import MyNavBar from '@/components/nav/navbar'
  import scrollBy from '@/mixins/scrollby'
+ import ScrollBy from '@/utils/scrollby.js'
 
  export default{
     name: 'Index',
@@ -44,7 +45,7 @@
     props: {},
     watch: {
         currIndex(){
-            this.handleScrollBy()
+            // this.handleScrollBy()
         },
 
     },
@@ -68,6 +69,9 @@
          * 点击navItem 清空autoplay的定时器
          */
         handleOpenClick(event){
+            this.scrollBy.setTargetY(event.index)
+            // this.scrollBy.scrollTo()
+            return
             if(this.autoScrollBy) {
                 this.autoScrollBy = false
                 clearInterval(this.timer)
@@ -137,6 +141,7 @@
         }
     },
     mounted() {
+        this.scrollBy = new ScrollBy('.my-child')
         this.$nextTick(() => {
             this.calcOffsetY().then(res => {
                 let { index } = res
@@ -144,7 +149,7 @@
                     this.currIndex = index
             })
         })
-        window.addEventListener('scroll', this.calcOffsetY, true)
+        // window.addEventListener('scroll', this.calcOffsetY, true)
         window.addEventListener('visibilitychange', () => {
             let state = document.visibilityState
             if(state == 'visible' && this.isAutoScroll) {
@@ -153,6 +158,9 @@
                 clearInterval(this.timer)
             }
         })
+    },
+    destroyed() {
+        this.scrollBy.destoryed()
     },
     mixins: [scrollBy]
  }
