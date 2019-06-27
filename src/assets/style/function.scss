@@ -1,0 +1,35 @@
+@import './var.scss';
+
+/*
+ * 判断e在m内部的时候不是直接拼接, 而是变成嵌套输出
+ * 可以使用在上下文的[--]来判断
+ */
+
+@function containModifier($selector) {
+  $selector: selectorToString($selector);
+
+  @if str-index($selector, $mo-separator) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+
+
+@function containWhenFlag($selector) {
+  $selector: selectorToString($selector);
+  @if str-index($selector, '.' + $selector){
+    @return true;
+  } @else{
+    @return false;
+  }
+}
+
+@function containPseudoClass($selector) {
+  $selector: selectorToString($selector);
+  @if str-index($selector, ':') {
+    @return true;
+  } @else {
+    @return false;
+  }
+}

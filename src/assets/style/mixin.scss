@@ -1,0 +1,168 @@
+@import './function.scss';
+@import './var.scss';
+
+/*
+ flex box wrap
+ */
+@mixin flex($dir: column, $justify: flex-start, $align: flex-start, $wrap: nowrap){
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+/*
+ * scroll-bar
+ */
+
+@mixin scroll-bar{
+  $--scrollbar-thumb-background: #b4bccc;
+  $--scrollbar-track-background: #fff;
+
+  &::-webkit-scrollbar {
+    z-index: 11;
+    width: 6px;
+
+    &:horizontal {
+      height: 6px;
+    }
+
+    &-thumb {
+      border-radius: 5px;
+      width: 6px;
+      background: $--scrollbar-thumb-background;
+    }
+    &-corner {
+      background: $--scrollbar-track-background;
+    }
+    &-track {
+      background: $--scrollbar-track-background;
+
+      &-piece {
+        background: $--scrollbar-track-background;
+        width: 6px;
+      }
+    }
+  }
+}
+
+
+
+/*
+ * BEM
+ */
+@mixin b($block) {
+  $B: $namespace + '-' + $block !global;
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+
+  @if containModifier($selector) {
+    @at-root {
+      #{$selector} {
+        .#{$B + $el-separator + $E} {
+          @content;
+        }
+      }
+    }
+  }@else {
+    @at-root {
+      #{$selector + $el-separator + $element} {
+        @content;
+      }
+    }
+  } 
+}
+
+
+@mixin m($modifier) {
+  $selector: &;
+  @at-root {
+    #{$selector + $mo-separator + $modifier} {
+      @content ;
+    }
+  }
+}
+
+
+@mixin when($state) {
+  $selector: &;
+  @at-root {
+    #{$selector}.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+@mixin pseudo($pseudo) {
+  @at-root #{&}#{':#{$pseudo}'} {
+    @content;
+  }
+}
+
+
+@mixin text-wp{
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spaceing: 1px;
+    @content;
+}
+
+
+@mixin text-title {
+  font-size: 27px;
+  font-weight: 600;
+  font-stretch: normal;
+  color: #0f0f0f;
+  @content;
+}
+@mixin text-sub_title {
+  font-size: 22px;
+  line-height: 3;
+  font-weight: normal;
+  font-stretch: normal;
+  color: #636363;
+  @content;
+}
+
+@mixin text-art {
+  font-size: 17px;
+  font-weight: 0;
+  font-stretch: normal;
+  color: #636363;
+  @content;
+}
+
+@mixin lines-over($lines: 2){
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: $lines;
+  -o-line-clamp: $lines;
+  -moz-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+@mixin line-over{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/** 与页面标题相关的引入 **/
+@mixin  page-title(
+    $size: $--font-size-default,
+    $color: $--color-black
+) {
+  font-size: $size;
+  line-height: 1.5;
+  color: $color;
+  word-break: keep-all;
+  @content;
+}

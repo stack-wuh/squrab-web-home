@@ -1,0 +1,31 @@
+@import '@/assets/style/mixin.scss';
+@import '@/assets/style/color.scss';
+
+@include b(port-scholl) {
+  .my-el-menu {
+    li.el-submenu {
+      text-align: right;
+    }
+
+    ul.el-menu--inline {
+      li {
+        text-align: right;
+      }
+      li.is-active {
+        border-right: 5px solid #1FA2FF;
+      }
+    }
+
+    .is-active {
+      background-color: #fff !important;
+    }
+
+    i.el-icon-arrow-down {
+      &::before{
+        content: '';
+        display: none;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,47 @@
+$el-separator: '__';
+$mo-separator: '--';
+$namespace: 'my';
+$state-prefix: 'is-';
+
+
+/** Color**/
+$--color-default:#1fa2ff !default;
+$--color-sub:#5194e2 !default;
+$--color-white: #fff !default;
+$--color-black-deep: #000 !default;
+$--color-black: #333 !default;
+$--color-black-light: #2d2d2d !default;
+$--color-wraning: #FFDA1F !default;
+$--color-gray: #ccc !default;
+
+
+/** Font**/
+$--font-size-default: 14px !default;
+$--font-size-small: 12px !default;
+$--font-size-middle: 16px !default;
+$--font-size-large: 18px !default;
+$--font-size--extra-large: 20px !default;
+$--font-size--big: 22px !default;
+$--font-size--big-large: 24px !default;
+
+$--font-weight-normal: 0 !important;
+$--font-weight-bold: 600 !important;
+$--font-weight-middle: 300 !default;
+$--font-weight-large: 500 !default;
+
+/**line**/
+$--line-default: 2em !default;
+$--line-center: 1.5em !default;
+$--line-small: 1em !default;
+$--line-middel: 3em !default;
+$--line-large: 4em !default;
+
+/** Text**/
+$--text-indent-default: 2em !default;
+$--text-indent-small: 1em !default;
+
+/** Background **/
+$--background-color-default: #eee !default;
+
+/** Transition**/
+$--all-transtion: all .5s cubic-bezier(.645, .045, .355, 1) !default;

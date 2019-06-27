@@ -1,0 +1,36 @@
+@keyframes t_2_bm {
+    to {
+        transform: translateY(0) scale3d(1, 1, 1);
+        opacity: 1;
+    }
+    from {
+        transform: translateY(10px) scale3d(1.5, 1.5, 1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes move_lf_2_rg {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50% {
+        transform: scaleX(1.2);
+    }
+    100% {
+        transform: translateX(0) translateZ(1);
+        opacity: 1;
+    }
+}
+
+/**文字类的动画 向右平移**/
+.text-move-right {
+    animation: 2s move_lf_2_rg cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+
+/** 从上往下的平移***/
+@mixin el-move-bm($duration: 1s, $delay: .5s) {
+    animation: t_2_bm $delay $duration linear infinite ;
+}
+
