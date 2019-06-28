@@ -2,12 +2,12 @@
   <section class='my-page'>
     <my-block :style="styles" currIndex="2">
       <section class="my-wrap">
-        <h3 class="my-wrap__sub">世界因遇见而伟大</h3>
-        <p class="my-wrap__sub">
+        <h3 class="my-wrap__sub js-trans_lf">世界因遇见而伟大</h3>
+        <p class="my-wrap__sub js-trans_rg">
           <strong class="is-text-active">方兔网络</strong>
           <span>让科技遇见生活</span>
         </p>
-        <p class="my-wrap__sub my-wrap__sub--white">专注同城生活, 用科技改变世界</p>
+        <p class="my-wrap__sub my-wrap__sub--white js-trans_lf">专注同城生活, 用科技改变世界</p>
       </section>
     </my-block>
   </section>
@@ -58,6 +58,7 @@
   user-select: none;
 
   @include e(sub) {
+    opacity: 0;
     line-height: 1.5em;
     letter-spacing: 2px;
 

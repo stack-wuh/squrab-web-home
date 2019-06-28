@@ -2,8 +2,8 @@
   <section class='my-page'>
     <my-elem-block :styles="styles" currIndex="1">
       <section class="my-wrap">
-        <h1 class="my-wrap__title">Live for More</h1>
-        <p  @click="handleAutoPlay" class="my-wrap__list">
+        <h1 class="my-wrap__title js-trans_lf">Live for More</h1>
+        <p  @click="handleAutoPlay" class="my-wrap__list js-fade_top">
           <span class="my-icon-arrow-bottom my-wrap__list--arrow my-wrap__list--arrow-1"></span>
           <span class="my-icon-arrow-bottom my-wrap__list--arrow my-wrap__list--arrow-2"></span>
           <span class="my-icon-arrow-bottom my-wrap__list--arrow my-wrap__list--arrow-3"></span>
@@ -34,8 +34,7 @@
   },
   methods: {
     handleAutoPlay(){
-      console.log(this.Home)
-      this.Home.autoScrollBy()
+      this.Home.scroller.autoPlay({index: 1, duration: 4000})
     }
   },
   created(){},
@@ -62,6 +61,7 @@
   width: 100%;
 
   @include e(title) {
+    opacity: 0;
     text-align: center;
     font-size: 7.5rem;
     color: #fff;
@@ -69,7 +69,10 @@
   }
 
   @include e(list) {
+    opacity: 0;
     @include flex($align: center);
+    width: 200px;
+    margin: 0 auto;
 
     &:hover {
       cursor: pointer;

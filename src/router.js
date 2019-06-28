@@ -42,6 +42,9 @@ export default new Router({
       children: [
         {
           path: '/home',
+          meta: {
+            scrollToTop: true
+          },
           component: () => import ('@/views/IndexManage/main')
         },
         {

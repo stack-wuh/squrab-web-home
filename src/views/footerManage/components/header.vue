@@ -3,7 +3,7 @@
     <section class="cm-wrapper">
       <section class="cm-wrapper-lf">
         <div class="img-box">
-          <img :src="LogoImg" alt="logo">
+          <img @click="() => {this.$router.push({path: '/'})}" :src="LogoImg" alt="logo">
         </div>
       </section>
       <section class="cm-wrapper-rg">
@@ -90,6 +90,9 @@
         & > img {
           width: auto;
           max-width: 100%;
+        }
+        &:hover {
+          cursor: pointer;
         }
       }
     }

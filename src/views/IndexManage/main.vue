@@ -12,10 +12,15 @@
             <Future key="future" id="future" class="my-child" />
             <Join key="join" id="join" class="my-child" />
         <!-- </transition-group> -->
-        <MyNavBar 
+        <!-- <MyNavBar 
             @open-click="handleOpenClick" 
             v-model="currIndex" 
             :light-index="navLightIndex">
+        </MyNavBar> -->
+        <MyNavBar
+            @open-click="handleOpenClick"
+            v-model="currIndex"
+            :light-index='scroller.navLightIndex'>
         </MyNavBar>
     </section>
 </template>
@@ -28,7 +33,6 @@
  import Join from './join'
  import MyFooter from '@/components/nav/footer'
  import MyNavBar from '@/components/nav/navbar'
- import scrollBy from '@/mixins/scrollby'
  import ScrollBy from '@/utils/scrollby.js'
 
  export default{
@@ -43,20 +47,14 @@
         MyNavBar
     },
     props: {},
-    watch: {
-        currIndex(){
-            // this.handleScrollBy()
-        },
-
-    },
+    watch: {},
     computed: {},
     data(){
         return {
             currIndex: 0, // 当前位置
-            navLightIndex: 0, // nav组件中的高亮下标
-            timer: null,  //全局定时器
-            delay: 3000, // 定时器的执行时间
-            isAutoScroll: false, // 是否自动滚动
+            scroller: {
+                navLightIndex: 0
+            }
         }
     },
     provide (){
@@ -69,87 +67,49 @@
          * 点击navItem 清空autoplay的定时器
          */
         handleOpenClick(event){
-            this.scrollBy.setTargetY(event.index)
-            // this.scrollBy.scrollTo()
-            return
-            if(this.autoScrollBy) {
-                this.autoScrollBy = false
-                clearInterval(this.timer)
-                this.timer = null
-            }
+            this.scroller.setTargetY(event.index)
+            this.scroller.clearAutoPlayer()
         },
-        /**
-         * 设置元素滚动
-         * 按照偏移距离滚动至指定位置
-         */
-        handleScrollBy (){
-            // this.$router.push({path: event.item.hash})
-            let elems = document.getElementsByClassName('my-child'),
-                elem = elems[this.currIndex]
-            let rect = elem.getBoundingClientRect()
-            let targetY = elem.offsetTop
-            let scrollTo = document.body.scrollTop || document.documentElement.scrollTop
-            // console.log(`rect: ${rect.top}, scrollTop: ${scrollTo}, targetY: ${targetY}`)
-            if(rect.top > 0) { // 向下滚动
-                scrollTo = document.body.scrollTop = document.documentElement.scrollTop += 40
-                if(scrollTo <= targetY - 10) {
-                    window.requestAnimationFrame(this.handleScrollBy)
-                }else {
-                    scrollTo = document.body.scrollTop = document.documentElement.scrollTop = targetY
+
+        addAnimateBy(){
+            let rects = this.scroller.elemsTarget.map(kk => kk.rect)
+            rects.forEach((val, _) => {
+                let {top, bottom, height} = val
+                let elem = this.scroller.elems[_]
+                let _classname = elem.className
+                if(_ == 0) {
+                    // console.log(top, bottom)
                 }
-            }else { // 向上滚动
-                scrollTo = document.body.scrollTop = document.documentElement.scrollTop -= 40
-                if(scrollTo >= targetY + 10) {
-                    window.requestAnimationFrame(this.handleScrollBy)
-                }else {
-                    scrollTo = document.body.scrollTop = document.documentElement.scrollTop = targetY
-                }
-            }
-        },
-        
-        /**
-         * 自动播放
-         */
-        autoScrollBy (){
-            let length = document.getElementsByClassName('my-child').length
-            this.isAutoScroll = true
-            this.timer = setInterval(() => {
-                this.currIndex = this.currIndex < length - 1 ? ++this.currIndex : 0
-            }, this.delay, false)
-        },
-        
-        /**
-         * 计算当前位置位于哪一个currIndex
-         */
-        calcOffsetY(){
-            let elems = [...document.getElementsByClassName('my-child')]
-            let rects = []
-            let {innerHeight} = window
-            let scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-            let _elems = elems.map((val, _) => {
-                let _offsetHeight = val.offsetHeight * _
                 if( 
-                    (scrollTop >= _offsetHeight) && 
-                    (scrollTop <= (val.offsetHeight * (_ + 1)))
-                ) {
-                    this.addElemClassName(val)
-                    return {index: _}
+                    top < 200 && 
+                     _ !== 0
+                ){
+                    if(!_classname.includes('js-animate-mark')) {
+                        elem.className = elem.className + ' js-animate-mark'
+                    }
+                    // elem.className = elem.className.replace('js-animate-mark', 'js-animate-out')
+                }else if(bottom < 200) {
+                    if(_classname.includes('js-animate-mark')) {
+                        elem.className = elem.className.replace('js-animate-mark', '')
+                    }
+                }else if(Math.abs(top) + 20 > height) {
+                    if(_classname.includes('js-animate-mark')) {
+                        elem.className = elem.className.replace('js-animate-mark', '')
+                    }
                 }
-            }).filter(Boolean).pop()
-            _elems && (this.navLightIndex = _elems.index)
-            return Promise.resolve(_elems)
+                if(_ == 0) {
+                    if(!_classname.includes('js-animate-mark')) {
+                        elem.className = elem.className + ' js-animate-mark'
+                    }
+                   
+                }
+            })
+            window.addEventListener('scroll', this.addAnimateBy, true)
         }
     },
     mounted() {
-        this.scrollBy = new ScrollBy('.my-child')
-        this.$nextTick(() => {
-            this.calcOffsetY().then(res => {
-                let { index } = res
-                if(this.currIndex !== index) 
-                    this.currIndex = index
-            })
-        })
-        // window.addEventListener('scroll', this.calcOffsetY, true)
+        this.scroller = new ScrollBy('.my-child')
+        this.addAnimateBy()
         window.addEventListener('visibilitychange', () => {
             let state = document.visibilityState
             if(state == 'visible' && this.isAutoScroll) {
@@ -160,9 +120,9 @@
         })
     },
     destroyed() {
-        this.scrollBy.destoryed()
+        this.scroller.destoryed()
     },
-    mixins: [scrollBy]
+    mixins: []
  }
 </script>
 

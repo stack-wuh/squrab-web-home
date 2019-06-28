@@ -2,10 +2,10 @@
   <section class='my-page'>
     <my-block :style="styles" currIndex="3">
       <section class="my-wrap">
-        <div class="img-wrap">
+        <div class="img-wrap js-trans_lf">
           <img src="../../../assets/imgs/index/icon_text.png" alt="icon_text">
         </div>
-        <p class="my-wrap__link">
+        <p class="my-wrap__link js-trans_rg">
           <a href="https://www.zhuansong.pro" target="_blank">查看专送Pro官网</a>
           <img src="../../../assets/imgs/index/icon_play.png" alt="icon_play">
         </p>
@@ -54,8 +54,8 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
   color: #fff;
-
   .img-wrap {
+    opacity: 0;
     & > img {
       width: auto;
       max-width: 100%;
@@ -63,6 +63,7 @@
   }
 
   @include e(link) {
+    opacity: 0;
     position: relative;
     height: 30px;
     margin-top: 20px;

@@ -2,8 +2,8 @@
   <section class='my-page'>
     <my-block :style="styles" currIndex="5">
       <section class="my-wrap">
-        <p class="my-wrap__title">SquRab Network</p>
-        <p class="my-wrap__sub">勇敢 真实 热爱</p>
+        <p class="my-wrap__title js-trans_lf">SquRab Network</p>
+        <p class="my-wrap__sub js-trans_rg">勇敢 真实 热爱</p>
       </section>
     </my-block>
   </section>
@@ -52,10 +52,12 @@
   text-align: center;
 
   @include e(title) {
+    opacity: 0;
     font-size: 80px;
     line-height: 1.5;
   }
   @include e(sub) {
+    opacity: 0;
     font-size: 40px;
     line-height: 1.5;
   }
