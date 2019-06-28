@@ -86,8 +86,10 @@
         width: 100%;
         height: 100%;
         cursor: pointer;
-        transform: translateY(-20%) rotateX(35deg) scale3d(.9, .9, .9);
-        transform-origin: right bottom;
+        background-color: rgba(255, 255, 255, .8);
+        background-size: 160% 160%;
+        background-position: 20% 20%;
+        transform-origin: center center ;
         box-shadow: 2px 20px 20px #999;
         transition: transform .5s cubic-bezier(0.075, 0.82, 0.165, 1), box-shadow .8s cubic-bezier(0.165, 0.84, 0.44, 1);
       }

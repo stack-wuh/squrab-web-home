@@ -1,7 +1,8 @@
 <template>
   <section class='my-page'>
     <section class="my-page__header trans_lf" :style="style">
-      <my-header></my-header>
+      <my-header class="js-mark-header slide-out">
+      </my-header>
     </section>
     <my-header class="my-page__fixed-header is-header-fixed"></my-header>
 
@@ -26,23 +27,27 @@
   props: {},
   watch: {
     '$route': function(to, from) {
-      // console.log('====================================');
-      // console.log('to', to);
-      // console.log('====================================');
-      // console.log('====================================');
-      // console.log('from', from);
-      // console.log('====================================');
+      // let elem = document.getElementsByClassName('js-mark-header')[0]
+      // if([...elem.classList].includes('slide-out')) {
+      //   elem.setAttribute('class', 'js-mark-header')
+      // }
+      // setTimeout(() => {
+      //   elem.setAttribute('class', 'js-mark-header slide-out')
+      //   this.resetHeaderBg()
+      // }, 300)        
       this.resetHeaderBg()
     }
   },
   computed: {},
   data(){
     return {
-      style: {}
+      style: {},
+      index: 0
     }
   },
   methods: {
     resetHeaderBg(){
+      this.index = 1
       let styles = new Map([
         [
           /news/,
@@ -80,7 +85,6 @@
       let style = actions.map(([key, val]) => {
         return {backgroundImage: 'url(' + val.bgImg + ')'}
       }).pop()
-
       let elem = document.getElementsByClassName('my-page__header')[0]
       let classList = [...elem.classList]
       if(!classList.includes('trans_lf')) {
@@ -120,6 +124,7 @@
 
 <style scoped lang='scss'>
 @import '@/assets/style/mixin.scss';
+@import '@/assets/style/animate.scss';
 .slide-leave-to, 
 .slide-enter-to {
   transform: translateX(-100%);
@@ -186,4 +191,23 @@
 .trans_lf {
   animation: trans 1s linear both;
 }
+
+@keyframes slide_out {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotateX(0);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(2.5) rotateX(-90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateX(-360deg);
+  }
+}
+.slide-out {
+  animation: slide_out .5s linear both;
+}
+
 </style>
