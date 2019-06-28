@@ -171,17 +171,19 @@
 
 @keyframes trans {
   0% {
+    opacity: 0;
     background-position: 0 0;
   }
   50% {
-    background-position: -2000px 0;
+    background-position: -2000px -1000px;
     background-color: $--color-default;
   }
   100% {
+    opacity: 1;
     background-position: 0 0;
   }
 }
 .trans_lf {
-  animation: trans 1s linear forwards;
+  animation: trans 1s linear both;
 }
 </style>

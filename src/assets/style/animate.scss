@@ -25,10 +25,64 @@
     }
 }
 
+@keyframes fade_top {
+    from{
+        opacity: 0;
+        transform: translateY(20%);
+        transform-origin: center bottom;
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+        transform-origin: center bottom;
+    }
+}
+
+@keyframes slide_rg {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+        transform-origin: top right;
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+        transform-origin: top right;
+    }
+}
+@keyframes slide_lf {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+        transform-origin: top left;
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+        transform-origin: top left;
+    }
+}
+
+/**渐变类**/
+.fade-top {
+    animation: fade_top .5s cubic-bezier(0.075, 0.82, 0.165, 1) both;
+}
+
+.slide-right {
+    animation: slide_rg .5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+.slide-lf {
+    animation: slide_lf .5s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+}
+
 /**文字类的动画 向右平移**/
 .text-move-right {
     animation: 2s move_lf_2_rg cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
+.text-move-left {
+    animation: move_lf_2_rg 1s cubic-bezier(0.165, 0.84, 0.44, 1) both reverse;
+}
+
 
 
 /** 从上往下的平移***/
@@ -36,3 +90,29 @@
     animation: t_2_bm $delay $duration linear infinite ;
 }
 
+.js-animate-mark {
+    .js-trans_lf {
+        @extend .text-move-right;
+        opacity: 1;
+    }
+    .js-trans_rg {
+        @extend .slide-right;
+        opacity: 1;
+    }
+    .js-fade_top {
+        @extend .fade-top;
+        animation-delay: .3s;
+    }
+}
+
+.js-animate-out {
+    .js-trans_lf {
+        @extend .text-move-right;
+        animation-direction: reverse;
+    }
+    .js-trans_rg {
+        @extend .slide-right;
+        animation-direction: reverse;
+        animation-delay: 1s;
+    }
+}

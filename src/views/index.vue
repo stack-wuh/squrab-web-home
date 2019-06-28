@@ -1,7 +1,9 @@
 <template>
     <section class='my-page'>
         <!-- <my-header></my-header> -->
-        <router-view></router-view>
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
         <my-footer></my-footer>
     </section>
 </template>

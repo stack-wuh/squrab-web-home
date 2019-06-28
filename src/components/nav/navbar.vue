@@ -139,13 +139,26 @@
   .is-tips-active {
     border-radius: 20px;
     background-color: rgba(0, 0, 0, .3);
-
+    animation: scale-up-hor-center .5s cubic-bezier(0.165, 0.84, 0.44, 1) both;
     &::after {
       width: 12px;
       height: 12px;
       left: 107px;
       top: 13px;
     }
+  }
+}
+
+@keyframes scale-up-hor-center {
+  0% {
+    opacity: 0;
+    transform: scaleX(.4);
+    transform-origin: 0 0;
+  }
+  100%{
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: 0 0;
   }
 }
 </style>
