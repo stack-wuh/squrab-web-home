@@ -5,18 +5,11 @@
                 <img src="../../assets/imgs/logo.png" alt="logo">
             </div>
         </header>
-        <!-- <transition-group name="fade" mode="out-in"> -->
             <Home key="home" id="home" class="my-child" />
             <Technology key="technology" id="technology" class="my-child" />
             <Lift key="lift" id="lift" class="my-child" />
             <Future key="future" id="future" class="my-child" />
             <Join key="join" id="join" class="my-child" />
-        <!-- </transition-group> -->
-        <!-- <MyNavBar 
-            @open-click="handleOpenClick" 
-            v-model="currIndex" 
-            :light-index="navLightIndex">
-        </MyNavBar> -->
         <MyNavBar
             @open-click="handleOpenClick"
             v-model="currIndex"
