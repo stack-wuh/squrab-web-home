@@ -32,7 +32,7 @@
    },
    {
      title: '生活',
-     sub: 'LIFY',
+     sub: 'LIFE',
      hash: '/home#lift'
    },
    {

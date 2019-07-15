@@ -3,7 +3,7 @@
     <my-block :style="styles" currIndex="4">
       <section class="my-wrap">
         <h3 class="my-wrap__title js-trans_lf">携手方兔 嗅探新的城市气息</h3>
-        <h5 class="my-wrap__sub js-trans_rg">对未来探索是方兔的企业基因，同城无人物流等领域是方兔的未来方</h5>
+        <h5 class="my-wrap__sub js-trans_rg">对未来探索是方兔的企业基因，同城无人物流等领域是方兔的未来方向</h5>
       </section>
     </my-block>
   </section>
