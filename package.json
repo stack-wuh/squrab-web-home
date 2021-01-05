@@ -19,7 +19,7 @@
     "url": "https://github.com/stack-wuh/vue-cli-template"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "babel-plugin-component": "^1.1.1",
     "compression-webpack-plugin": "^2.0.0",
     "element-ui": "^2.4.11",
